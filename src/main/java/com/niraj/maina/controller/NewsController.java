@@ -3,8 +3,12 @@ package com.niraj.maina.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.niraj.maina.entity.News;
@@ -26,6 +30,33 @@ public class NewsController {
 		newsList.add(n2);
 		newsList.add(n1);		
 		return newsList;
+	}
+
+	
+	@RequestMapping(value="/site" , method= RequestMethod.GET)
+	public String getPublicationName() {
+        String siteName = "" ;
+
+		ArrayList publicationList = new ArrayList<String>();
+		publicationList.add("www.patnaInfo.com");
+		publicationList.add("www.hindustanTimes.com");
+		publicationList.add("www.khojo.online");
+		publicationList.add("www.newsdekho.in");
+		publicationList.add("www.kauwa.online");
+		publicationList.add("www.work1.com");
+				
+		Random rand = new Random();
+		int upperlimit = 5;
+		int randNum = rand.nextInt(upperlimit);		
+		siteName = (String) publicationList.get(randNum);
+        
+		return siteName;
+	}
+
+	@GetMapping("/site/{t}")
+	public String newsType(@PathVariable("t") String type) {
+		System.out.println("News Type in Request ==> " + type);
+		return "News Type "+ type;
 	}
 
 }
