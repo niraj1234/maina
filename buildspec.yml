@@ -7,7 +7,7 @@ phases:
       - mvn clean package
   post_build:
     commands:
-      - echo Build completed successfully | Niraj | Maina Project
+      - echo Build completed successfully
 artifacts:
   files:
     - target/maina.jar
